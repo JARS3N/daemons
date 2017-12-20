@@ -1,0 +1,12 @@
+Package: daemons
+Type: Package
+Title: daemons
+Version: 0.1.0
+Author: J.Arsenault
+Maintainer: Who to complain to <JARS3N@GMAIL.COM>
+Description: holds scripts for various cron jobs to work in the middle of the night
+License: none
+Imports:
+        cronR
+Encoding: UTF-8
+LazyData: true
