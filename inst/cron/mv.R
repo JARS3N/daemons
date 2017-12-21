@@ -1,4 +1,5 @@
 library(details)
+print(Sys.time())
 main <- "/mnt/LSAG/Spotting/Logging"
 subs <- c("XFe24", "XFe96", "XFp")
 dirs <- file.path(main, subs)
