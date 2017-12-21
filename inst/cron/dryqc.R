@@ -1,4 +1,5 @@
 library(RMySQL)
+print(Sys.time())
 #library(dryqc)
 dir <- "/mnt/LSAG/00 AA SENSOR CRTG MFG/01 CRTG QC_RELEASE/01 XF24-2"
 dir_list <- list.dirs(dir, recursive = F)
@@ -30,7 +31,7 @@ if (length(what_to_upload) > 0) {
   new_data <-do.call('rbind', lapply(what_to_upload, dryqc::load_qc_stats))
   work <- dryqc::write(new_data)
 }
-log_name<-paste0("Log_date_",gsub(":","-",gsub(" ","_",Sys.time())),"dq.txt")
-path<-file.path("/home/Jarsenault/ShinyApps/cron_log")
-writeLines(Sys.time(),file.path(path,log_name))
+#log_name<-paste0("Log_date_",gsub(":","-",gsub(" ","_",Sys.time())),"dq.txt")
+#path<-file.path("/home/Jarsenault/ShinyApps/cron_log")
+#writeLines(Sys.time(),file.path(path,log_name))
 #saveRDS(not_in_db,file.path(path,log_name,".RDS))
