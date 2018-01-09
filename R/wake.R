@@ -1,4 +1,5 @@
 wake<-function(){
+  #need to rund as sudo
   require(cronR)
   cmd_dryqc<-cron_rscript(system.file(package='daemons',path='cron','dryqc.R'))
   cmd_mv<-cron_rscript(system.file(package='daemons',path='cron','mv.R'))
