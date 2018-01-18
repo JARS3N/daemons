@@ -17,7 +17,7 @@ are_there_wet_qc_folders <- sapply(lapply(
     full.names = T
   ),
   grepl,
-  pattern = "DRY QC"
+  pattern = "DRY QC|DQC"
 ),
 any)
 
