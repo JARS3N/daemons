@@ -32,6 +32,6 @@ if (length(what_to_upload) > 0) {
   work <- dryqc::write(new_data)
 }
 #log_name<-paste0("Log_date_",gsub(":","-",gsub(" ","_",Sys.time())),"dq.txt")
-#path<-file.path("/home/Jarsenault/ShinyApps/cron_log")
+#path<-file.path("/home/me/ShinyApps/cron_log")
 #writeLines(Sys.time(),file.path(path,log_name))
 #saveRDS(not_in_db,file.path(path,log_name,".RDS))
