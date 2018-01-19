@@ -34,7 +34,8 @@ parse_sub2_context<-function(DIR){
   size.of.list <- length(index_FLS);
   cl <- makeCluster( min(size.of.list, detectCores()) );
   work<-parallel::parLapply(cl=cl,FLS[index_FLS],get_context_results)
-  DATA<-do.call('rbind',work)
+  null_check<-sapply(work,is.null)
+  DATA<-do.call('rbind',work[!null_check])
   stopCluster(cl);
   con <- adminKraken::con_mysql()
   dbWriteTable(con, name="mv_context",value= DATA, append=TRUE,overwrite = FALSE,row.names=FALSE)
