@@ -21,9 +21,28 @@ get_context_results<-function(xml){
     Lot,sn,result,codes
   )
 }
-
+is_it_in_db_already<-function(x){ 
+require(RMySQL)
+db_lot<-collect(distinct(select(tbl(db,"mv_context"),Lot)))
+rdb<-adminKraken::con_mysql()
+query<- paste0('Select distinct(Lot) from mv_context where Lot="',
+         #basename(sub2[1]),
+         basename(x),
+         '";')
+a<- RMySQL::dbSendQuery(rdb,query)
+b<-RMySQL::fetch(a)
+RMySQL::dbClearResult(a)
+dbDisconnect(rdb)
+as.logical(length(b$Lot))
+}
 
 parse_sub2_context<-function(DIR){
+  if(is_it_in_db_already(DIR)){
+    cat("Lot: ")
+    cat(basename(DIR)),
+    cat(" is already in the Database. Moving on!\n")
+    return(NULL)
+   }
   require(parallel);
   big_start <- Sys.time()
   FLS <- file.path(list.dirs(DIR,full.names = T,recursive = F),"context.xml")
@@ -40,15 +59,17 @@ parse_sub2_context<-function(DIR){
   dbWriteTable(con, name="mv_context",value= DATA, append=TRUE,overwrite = FALSE,row.names=FALSE)
   big_end<- Sys.time()
   cat("wrote Lot ")
-  cat(unname(unique(DATA$Lot)))
+  cat(basename(DIR))
   cat(" to table at ")
-  cat(big_end)
+  cat(Sys.time())
   cat(" process took ")
   cat(big_end-big_start)
   cat(" seconds\n")
   dbDisconnect(con)
   message("disconnect")
 }
+
+
 
 run<-lapply(sub2,parse_sub2_context)
 
