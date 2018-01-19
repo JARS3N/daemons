@@ -5,6 +5,9 @@ sub2 <- unlist(lapply(dirs, list.dirs, recursive = F, full.names = T))
 
 get_context_results<-function(xml){
   ###
+  if(!file.exists('sdd')){
+  return(NULL)
+  }
   library(XML)
   xml2<-XML::xmlTreeParse(xml,useInternalNodes=T)
   index_string<-function(string,index){
