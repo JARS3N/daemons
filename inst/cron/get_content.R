@@ -27,9 +27,10 @@ parse_sub2_context<-function(DIR){
   require(parallel);
   big_start <- Sys.time()
   FLS <- file.path(list.dirs(DIR,full.names = T,recursive = F),"context.xml")
-  size.of.list <- length(FLS);
+   index_FLS<-grep("^[0-9]",basename(dirname(FLS)))
+  size.of.list <- length(index_FLS);
   cl <- makeCluster( min(size.of.list, detectCores()) );
-  work<-parallel::parLapply(cl=cl,FLS,get_context_results)
+  work<-parallel::parLapply(cl=cl,FLS[index_FLS],get_context_results)
   DATA<-do.call('rbind',work)
   stopCluster(cl);
   con <- adminKraken::con_mysql()
