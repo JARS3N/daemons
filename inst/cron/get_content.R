@@ -39,7 +39,7 @@ as.logical(length(b$Lot))
 parse_sub2_context<-function(DIR){
   if(is_it_in_db_already(DIR)){
     cat("Lot: ")
-    cat(basename(DIR)),
+    cat(basename(DIR))
     cat(" is already in the Database. Moving on!\n")
     return(NULL)
    }
