@@ -29,7 +29,7 @@ parse_sub2_context<-function(DIR){
   FLS <- file.path(list.dirs(DIR,full.names = T,recursive = F),"context.xml")
    #index_FLS<-grep("^[0-9]",basename(dirname(FLS)))
   exists<-sapply(FLS,file.exists)
-  size.of.list <- length(index_FLS);
+  size.of.list <- sum(exists);
   cl <- makeCluster( min(size.of.list, detectCores()) );
   work<-parallel::parLapply(cl=cl,FLS[exists],get_context_results)
   null_check<-sapply(work,is.null)
