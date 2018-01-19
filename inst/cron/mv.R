@@ -16,7 +16,7 @@ need_to_add <- df[!(df$Lot %in% dbLots$Lot), ]
 
 work<-details::check_nightly(need_to_add)
 
-log_name<-paste0("Log_date_",gsub(":","-",gsub(" ","_",Sys.time())),"mv.txt")
-path<-file.path("/home/Jarsenault/ShinyApps/cron_log")
-writeLines(Sys.time(),file.path(path,log_name))
-saveRDS(need_to_add,file.path(path,log_name,".RDS"))
+#log_name<-paste0("Log_date_",gsub(":","-",gsub(" ","_",Sys.time())),"mv.txt")
+#path<-file.path("/home/Jarsenault/ShinyApps/cron_log")
+#writeLines(Sys.time(),file.path(path,log_name))
+#saveRDS(need_to_add,file.path(path,log_name,".RDS"))
