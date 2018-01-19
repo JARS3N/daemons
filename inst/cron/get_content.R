@@ -23,8 +23,8 @@ get_context_results<-function(xml){
 }
 is_it_in_db_already<-function(x){ 
 require(RMySQL)
-db_lot<-collect(distinct(select(tbl(db,"mv_context"),Lot)))
 rdb<-adminKraken::con_mysql()
+db_lot<-collect(distinct(select(tbl(rdb,"mv_context"),Lot)))
 query<- paste0('Select distinct(Lot) from mv_context where Lot="',
          #basename(sub2[1]),
          basename(x),
