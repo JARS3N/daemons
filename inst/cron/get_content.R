@@ -5,9 +5,6 @@ sub2 <- unlist(lapply(dirs, list.dirs, recursive = F, full.names = T))
 
 get_context_results<-function(xml){
   ###
-  if(!file.exists('sdd')){
-  return(NULL)
-  }
   library(XML)
   xml2<-XML::xmlTreeParse(xml,useInternalNodes=T)
   index_string<-function(string,index){
@@ -30,10 +27,11 @@ parse_sub2_context<-function(DIR){
   require(parallel);
   big_start <- Sys.time()
   FLS <- file.path(list.dirs(DIR,full.names = T,recursive = F),"context.xml")
-   index_FLS<-grep("^[0-9]",basename(dirname(FLS)))
+   #index_FLS<-grep("^[0-9]",basename(dirname(FLS)))
+  exists<-sapply(FLS,file.exists)
   size.of.list <- length(index_FLS);
   cl <- makeCluster( min(size.of.list, detectCores()) );
-  work<-parallel::parLapply(cl=cl,FLS[index_FLS],get_context_results)
+  work<-parallel::parLapply(cl=cl,FLS[exists],get_context_results)
   null_check<-sapply(work,is.null)
   DATA<-do.call('rbind',work[!null_check])
   stopCluster(cl);
