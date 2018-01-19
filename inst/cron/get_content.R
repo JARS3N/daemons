@@ -1,4 +1,4 @@
-main <- "G://Spotting/Logging"
+main <- "/mnt/LSAG/Spotting/Logging"
 subs <- c("XFe24", "XFe96", "XFp")
 dirs <- file.path(main, subs)
 sub2 <- unlist(lapply(dirs, list.dirs, recursive = F, full.names = T))
