@@ -23,8 +23,8 @@ parse_sub2_context<-function(DIR){
   if(length(FLS)<1){return(NULL)}else{
     message("files exist.")
   }
-  cl <- makeCluster( min(size.of.list, detectCores()) );
-  work<-parallel::parLapply(cl=cl,FLS[exists],get_context_results)
+  cl <- makeCluster( min(legth(FLS), detectCores()) );
+  work<-parallel::parLapply(cl=cl,FLS,get_context_results)
   DATA<-do.call('rbind',work)
   stopCluster(cl);
   con <- adminKraken::con_mysql()
