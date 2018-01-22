@@ -25,6 +25,9 @@ munge_context <- function(from='remote') {
     cat("There are ",
     sum(!index),
     " Lots to process\n")
+    if(sum(!index)>0){
+      print(basename(sub2)[!index])
+      }
     run <- lapply(sub2[!index], parse_sub2_context)
     message("Done!!!")
   }
