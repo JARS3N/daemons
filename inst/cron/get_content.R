@@ -1,4 +1,6 @@
 main <- "/mnt/LSAG/Spotting/Logging"
+# check if the drve is connceted
+connected<-dir.exists(main)
 subs <- c("XFe24", "XFe96", "XFp")
 dirs <- file.path(main, subs)
 sub2 <- unlist(lapply(dirs, list.dirs, recursive = F, full.names = T))
@@ -18,7 +20,7 @@ get_context_results<-function(xml){
   codes<-xpathSApply(xml2, path = "//RegressionResults//ResultCodes",xmlValue)
   result<-xpathSApply(xml2, path = "//Result",xmlValue)[1]
   data.frame(
-    Lot,sn,result,codes
+    Lot,sn,result,codes,stringsAsFactors=FALSE
   )
 }
 is_it_in_db_already<-function(x){ 
