@@ -13,5 +13,5 @@ get_context_results <- function(xml) {
   codes <-
     xpathSApply(xml2, path = "//RegressionResults//ResultCodes", xmlValue)
   result <- xpathSApply(xml2, path = "//Result", xmlValue)[1]
-  data.frame(Lot, sn, result, codes,stingsAsFactors=FALSE)
+  data.frame(Lot, sn, result, codes,stringsAsFactors=FALSE)
 }
