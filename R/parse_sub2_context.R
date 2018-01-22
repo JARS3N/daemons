@@ -19,7 +19,7 @@ parse_sub2_context<-function(DIR){
   big_start <- Sys.time()
   # FLS <- file.path(list.dirs(DIR,full.names = T,recursive = F),"context.xml")
   dir_fls <- list.dirs(DIR,full.names = T,recursive = F)
-  FLS <- sapply(dir_fls,list.files,pattern="context.xml",full.names=T)
+  FLS <- unlist(sapply(dir_fls,list.files,pattern="context.xml",full.names=T))
   if(length(FLS)<1){return(NULL)}else{
     message("files exist.")
   }
