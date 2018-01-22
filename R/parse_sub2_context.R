@@ -23,7 +23,7 @@ parse_sub2_context<-function(DIR){
   if(length(FLS)<1){return(NULL)}else{
     message("files exist.")
   }
-  cl <- makeCluster( min(legth(FLS), detectCores()) );
+  cl <- makeCluster( min(length(FLS), detectCores()) );
   work<-parallel::parLapply(cl=cl,FLS,get_context_results)
   DATA<-do.call('rbind',work)
   stopCluster(cl);
