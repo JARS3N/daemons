@@ -22,6 +22,9 @@ munge_context <- function(from='remote') {
     # filter out stuff in db already
     exists_in_db<-db_lots()
     index<-basename(sub2) %in% exists_in_db
+    cat("There are ",
+    sum(!index),
+    " Lots to process\n")
     run <- lapply(sub2[!index], parse_sub2_context)
     message("Done!!!")
   }
