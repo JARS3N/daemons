@@ -1,5 +1,9 @@
-munge_context <- function() {
-  main <- "/mnt/LSAG/Spotting/Logging"
+munge_context <- function(from='remote') {
+  loc_list<-c(
+    local="G:/Spotting/Logging",
+    remote="/mnt/LSAG/Spotting/Logging"
+  )
+  main <- loc_list[from]
   # check if the drve is connceted
   connected <- dir.exists(main)
   if (!connected) {
@@ -15,8 +19,10 @@ munge_context <- function() {
         recursive = F,
         full.names = T
       ))
-    run <- lapply(sub2, parse_sub2_context)
-    sapply(run[run == T], print)
+    # filter out stuff in db already
+    exists_in_db<-db_lots()
+    index<-basename(sub2) %in% exists_in_db
+    run <- lapply(sub2[!index], parse_sub2_context)
     message("Done!!!")
   }
 }
