@@ -7,6 +7,3 @@ check_for_package <- function(pkg, os) {
   }
 }
 
-.onLoad <- function() {
-check_for_package("cronR","unix")
-}
